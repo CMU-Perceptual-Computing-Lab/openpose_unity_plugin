@@ -1,4 +1,4 @@
-OpenPose - Frequently Asked Question (FAQ)
+OpenPose Unity Plugin - Frequently Asked Question (FAQ)
 ============================================
 
 ## Contents
