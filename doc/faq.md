@@ -10,6 +10,7 @@ OpenPose Unity Plugin - Frequently Asked Question (FAQ)
 **Q: Unity crashes** - Unity crashes when I run the program. 
 
 **A**: Unity crashes when OpenPose crashes. Try the following methods to detect the error: 
-			1. Try making sure models and plugins are correctly downloaded. 
-			2. Try reducing net_resolution to smaller number (e.g. 80) and disabling face/hands. 
-			3. Try running OpenPose C++ binaries. More information will be provided. 
+
+	1. Try making sure models and plugins are correctly downloaded. 
+	2. Try reducing net_resolution to smaller number (e.g. 80) and disabling face/hands. 
+	3. Try running OpenPose C++ binaries. More information will be provided. 
