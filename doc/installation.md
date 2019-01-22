@@ -4,7 +4,7 @@
 - **Windows** 7, 8, 10.
 
 ## Unity Software
-- Unity versions higher or equal than 2018.2.9f1.
+- Unity versions higher or equal than 2018.2.9f1. Previous versions may work as well. 
 
 ## Prerequisites
 - If you plan to use the default OpenPose DLL (recommended):
