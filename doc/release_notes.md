@@ -1,7 +1,7 @@
 OpenPose Unity Plugin - Release Notes
 ============================================
 
-## Current version - v1.0.0 (for OpenPose 1.5.0)
+## Current version - v1.0.0 for OpenPose 1.5.0 (Jan 12, 2019)
 1. Main functionality:
   1. Import and control OpenPose as dll plugin
   2. OpenPose debugging log in Unity
