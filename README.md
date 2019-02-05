@@ -9,6 +9,8 @@
 
 This repository is developed to create an OpenPose plugin for Unity users. It uses OpenPose version 1.5 or newer and provides formatted OpenPose output and some examples.
 
+Demo Video: link
+
 <p align="center">
     <img src="doc/media/main.png", width="480">
 </p>
