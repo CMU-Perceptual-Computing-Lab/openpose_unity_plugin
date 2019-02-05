@@ -9,6 +9,8 @@
 
 This repository is developed to create an OpenPose plugin for Unity users. It uses OpenPose version 1.5 or newer and provides formatted OpenPose output and some examples.
 
+Demo Video: [link](https://youtu.be/Jrcak4n6PG4)
+
 <p align="center">
     <img src="doc/media/main.png", width="480">
 </p>
@@ -43,15 +45,7 @@ This is an alpha release, everything is subject to change. The plugin will final
 
 
 ## Installation, Reinstallation and Uninstallation
-Follow the steps:
-
-1. Clone or download the project into your local machine.
-2. Go to “OpenPosePlugin/Assets/OpenPose/” folder and run "getPlugins.bat". This will automatically download and unzip OpenPose plugins.
-3. Go to “OpenPosePlugin/Assets/StreamingAssets/models/” folder and run "getModels.bat". This will automatically download required models for OpenPose. 
-4. Read the [detailed documentation](OpenPosePlugin/Assets/OpenPose/Documents/README.pdf) and make sure the portable OpenPose binaries work in your machine.
-5. Open Unity editor and run the "Demo.unity" in "OpenPosePlugin/Assets/OpenPose/Examples/Scenes/".
-6. You can optionally read the [UML diagram](OpenPosePlugin/Assets/OpenPose/Documents/OpenPoseUnityPlugin_UML.pdf) for more information.
-
+Follow the steps in [installation documentation](doc/installation.md).
 
 
 ## Authors and Contributors

@@ -99,13 +99,13 @@ namespace OpenPose.Example {
                 /* protoTxtPath */ "", /* caffeModelPath */ "");
 
             OPWrapper.OPConfigureHand(
-                /* enable */ handEnabled, /* netInputSize */ handResolution,
-                /* scalesNumber */ 1, /* scaleRange */ 0.4f, /* tracking */ false,
-                /* renderMode */ RenderMode.None,
+                /* enable */ handEnabled, /* detector */ Detector.Body, /* netInputSize */ handResolution,
+                /* scalesNumber */ 1, /* scaleRange */ 0.4f, /* renderMode */ RenderMode.None,
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.2f);
 
             OPWrapper.OPConfigureFace(
-                /* enable */ faceEnabled, /* netInputSize */ faceResolution, /* renderMode */ RenderMode.None,
+                /* enable */ faceEnabled, /* detector */ Detector.Body, 
+                /* netInputSize */ faceResolution, /* renderMode */ RenderMode.None,
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.4f);
 
             OPWrapper.OPConfigureExtra(
@@ -122,8 +122,9 @@ namespace OpenPose.Example {
 
             OPWrapper.OPConfigureOutput(
                 /* verbose */ -1.0, /* writeKeypoint */ "", /* writeKeypointFormat */ DataFormat.Yml,
-                /* writeJson */ "", /* writeCocoJson */ "", /* writeCocoFootJson */ "", /* writeCocoJsonVariant */ 1,
-                /* writeImages */ "", /* writeImagesFormat */ "png", /* writeVideo */ "", /* writeVideoFps */ 30.0,
+                /* writeJson */ "", /* writeCocoJson */ "", /* writeCocoFootJson */ "",
+                /* writeCocoJsonVariant */ 1, /* writeImages */ "", /* writeImagesFormat */ "png",
+                /* writeVideo */ "", /* writeVideoFps */ 30.0, /* writeVideoWithAudio */ false,
                 /* writeHeatMaps */ "", /* writeHeatMapsFormat */ "png", /* writeVideo3D */ "",
                 /* writeVideoAdam */ "", /* writeBvh */ "", /* udpHost */ "", /* udpPort */ "8051");
 

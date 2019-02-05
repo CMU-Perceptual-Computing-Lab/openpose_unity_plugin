@@ -69,13 +69,12 @@ namespace OpenPose {
             bool maximizePositives, double fpsMax, string protoTxtPath, string caffeModelPath
         );
         [DllImport("openpose")] public static extern void _OPConfigureHand(
-            bool enable, int netInputSizeX, int netInputSizeY, // Point
-            int scalesNumber, float scaleRange, bool tracking,
-            byte renderMode, // RenderMode
+            bool enable, byte detector, int netInputSizeX, int netInputSizeY, // Point
+            int scalesNumber, float scaleRange, byte renderMode, // RenderMode
             float alphaKeypoint, float alphaHeatMap, float renderThreshold
         );
         [DllImport("openpose")] public static extern void _OPConfigureFace(
-            bool enable, int netInputSizeX, int netInputSizeY, // Point
+            bool enable, byte detector, int netInputSizeX, int netInputSizeY, // Point
             byte renderMode, // RenderMode
             float alphaKeypoint, float alphaHeatMap, float renderThreshold
         );
@@ -92,7 +91,7 @@ namespace OpenPose {
         [DllImport("openpose")] public static extern void _OPConfigureOutput(
             double verbose, string writeKeypoint, byte writeKeypointFormat, // DataFormat
             string writeJson, string writeCocoJson, string writeCocoFootJson, int writeCocoJsonVariant,
-            string writeImages, string writeImagesFormat, string writeVideo, double writeVideoFps,
+            string writeImages, string writeImagesFormat, string writeVideo, double writeVideoFps, bool writeVideoWithAudio,
             string writeHeatMaps, string writeHeatMapsFormat, string writeVideo3D, string writeVideoAdam,
             string writeBvh, string udpHost, string udpPort
         );

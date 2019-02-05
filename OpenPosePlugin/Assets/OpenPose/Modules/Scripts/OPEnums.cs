@@ -37,6 +37,14 @@ namespace OpenPose {
         Image
 	}
 
+    // From OpenPose: op::Detector
+    public enum Detector : byte {
+        Body = 0,
+        OpenCV,
+        Provided,
+        BodyWithTracking,
+        Size,
+    }
     // From OpenPose: op::ProducerType
 	public enum ProducerType : byte {
         /** Stereo FLIR (Point-Grey) camera reader. Based on Spinnaker SDK. */
