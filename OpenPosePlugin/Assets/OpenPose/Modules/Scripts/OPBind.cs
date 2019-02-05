@@ -74,7 +74,7 @@ namespace OpenPose {
             float alphaKeypoint, float alphaHeatMap, float renderThreshold
         );
         [DllImport("openpose")] public static extern void _OPConfigureFace(
-            bool enable, int netInputSizeX, int netInputSizeY, // Point
+            bool enable, byte detector, int netInputSizeX, int netInputSizeY, // Point
             byte renderMode, // RenderMode
             float alphaKeypoint, float alphaHeatMap, float renderThreshold
         );

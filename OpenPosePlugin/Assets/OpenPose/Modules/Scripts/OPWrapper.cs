@@ -119,32 +119,31 @@ namespace OpenPose {
         // Hand parameter configuration (with default value)
         // Please see OpenPose documentation for explanation on every parameter
         public static void OPConfigureHand(
-            bool enable = false, Vector2Int? netInputSize = null,
-            int scalesNumber = 1, float scaleRange = 0.4f, bool tracking = false,
-            RenderMode renderMode = RenderMode.None,
+            bool enable = false, Detector detector = Detector.Body, Vector2Int? netInputSize = null,
+            int scalesNumber = 1, float scaleRange = 0.4f, RenderMode renderMode = RenderMode.None,
             float alphaKeypoint = 0.6f, float alphaHeatMap = 0.7f, float renderThreshold = 0.2f){
 
             // Other default values
             Vector2Int _netInputSize = netInputSize ?? new Vector2Int(368, 368);
 
             OPBind._OPConfigureHand(
-                enable, _netInputSize.x, _netInputSize.y, // Point
-                scalesNumber, scaleRange, tracking,
-                (byte) renderMode, // RenderMode
+                enable, (byte) detector, _netInputSize.x, _netInputSize.y, // Point
+                scalesNumber, scaleRange, (byte) renderMode, // RenderMode
                 alphaKeypoint, alphaHeatMap, renderThreshold
             );
         }
         // Face parameter configuration (with default value)
         // Please see OpenPose documentation for explanation on every parameter
         public static void OPConfigureFace(
-            bool enable = false, Vector2Int? netInputSize = null, RenderMode renderMode = RenderMode.None,
+            bool enable = false, Detector detector = Detector.Body,
+            Vector2Int? netInputSize = null, RenderMode renderMode = RenderMode.None,
             float alphaKeypoint = 0.6f, float alphaHeatMap = 0.7f, float renderThreshold = 0.4f){
 
             // Other default values
             Vector2Int _netInputSize = netInputSize ?? new Vector2Int(368, 368);
 
             OPBind._OPConfigureFace(
-                enable, _netInputSize.x, _netInputSize.y, // Point
+                enable, (byte) detector, _netInputSize.x, _netInputSize.y, // Point
                 (byte) renderMode, // RenderMode
                 alphaKeypoint, alphaHeatMap, renderThreshold
             );
@@ -186,16 +185,17 @@ namespace OpenPose {
             double verbose = -1.0, string writeKeypoint = "", DataFormat writeKeypointFormat = DataFormat.Yml,
             string writeJson = "", string writeCocoJson = "", string writeCocoFootJson = "",
             int writeCocoJsonVariant = 1, string writeImages = "", string writeImagesFormat = "png",
-            string writeVideo = "", double writeVideoFps = 30.0, string writeHeatMaps = "",
+            string writeVideo = "", double writeVideoFps = 30.0, bool writeVideoWithAudio = false, string writeHeatMaps = "",
             string writeHeatMapsFormat = "png", string writeVideo3D = "", string writeVideoAdam = "",
             string writeBvh = "", string udpHost = "", string udpPort = "8051"){
 
             OPBind._OPConfigureOutput(
                 verbose, writeKeypoint, (byte) writeKeypointFormat, // DataFormat
-                writeJson, writeCocoJson, writeCocoFootJson, writeCocoJsonVariant,
-                writeImages, writeImagesFormat, writeVideo,
-                writeVideoFps, writeHeatMaps, writeHeatMapsFormat,
-                writeVideo3D, writeVideoAdam, writeBvh, udpHost, udpPort
+                writeJson, writeCocoJson, writeCocoFootJson, 
+                writeCocoJsonVariant, writeImages, writeImagesFormat, 
+                writeVideo, writeVideoFps, writeVideoWithAudio, writeHeatMaps, 
+                writeHeatMapsFormat, writeVideo3D, writeVideoAdam, 
+                writeBvh, udpHost, udpPort
             );
         }
         // GUI parameter configuration (with default value)
