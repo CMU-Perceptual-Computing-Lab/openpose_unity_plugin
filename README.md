@@ -4,15 +4,16 @@
 
 -----------------
 
-# OpenPose Unity Plugin
-[OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) represents the **first real-time multi-person system to jointly detect human body, hand, facial, and foot keypoints (in total 135 keypoints) on single images**.
+**OpenPose Unity Plugin** is a **wrapper of the [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) library for Unity users**. It provides formatted OpenPose output and some examples. [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) is a real-time multi-person system able to jointly detect human body, hand, facial, and foot keypoints (in total 135 keypoints) on single images.
 
-This repository is developed to create an OpenPose plugin for Unity users. It uses OpenPose version 1.5 or newer and provides formatted OpenPose output and some examples.
+The OpenPose Unity Plugin project is **authored by [Tianyi Zhao](http://tianyizhao.com), [Gines Hidalgo](https://www.gineshidalgo.com/), and [Yaser Sheikh](http://www.cs.cmu.edu/~yaser/)**. Currently, it is being **maintained by [Tianyi Zhao](http://tianyizhao.com) and [Gines Hidalgo](https://www.gineshidalgo.com/)**.
 
-Demo Video: [link](https://youtu.be/Jrcak4n6PG4)
+[**Demo/tutorial video**](https://youtu.be/Jrcak4n6PG4) of the working system.
 
 <p align="center">
     <img src="doc/media/main.png", width="480">
+    <br>
+    <sup><a href="http://tianyizhao.com" target="_blank">Tianyi Zhao</a> (left) and <a href="https://www.gineshidalgo.com" target="_blank">Gines Hidalgo</a> (right) testing the OpenPose Unity Plugin</sup>
 </p>
 
 
@@ -25,9 +26,8 @@ This is an alpha release, everything is subject to change. The plugin will final
 ## Contents
 1. [Results](#results)
 2. [Installation, Reinstallation and Uninstallation](#installation-reinstallation-and-uninstallation)
-3. [Authors and Contributors](#authors-and-contributors)
-4. [Citation](#citation)
-5. [License](#license)
+3. [Citation](#citation)
+4. [License](#license)
 
 
 
@@ -35,21 +35,21 @@ This is an alpha release, everything is subject to change. The plugin will final
 ### Body and Foot Estimation
 <p align="center">
     <img src="doc/media/body_foot.png", width="360">
+    <br>
+    <sup>Testing the OpenPose Unity Plugin for body and foot detection</sup>
 </p>
 
 ### Body, Foot, Face, and Hands Estimation
 <p align="center">
     <img src="doc/media/hand_face.png", width="360">
+    <br>
+    <sup>Testing the OpenPose Unity Plugin for body, foot, face, and hand detection</sup>
 </p>
 
 
 
 ## Installation, Reinstallation and Uninstallation
-Follow the steps in [installation documentation](doc/installation.md).
-
-
-## Authors and Contributors
-OpenPose Unity Plugin is authored by [Tianyi Zhao](http://tianyizhao.com), [Gines Hidalgo](https://www.gineshidalgo.com/), and [Yaser Sheikh](http://www.cs.cmu.edu/~yaser/). Currently, it is being maintained by [Tianyi Zhao](http://tianyizhao.com) and [Gines Hidalgo](https://www.gineshidalgo.com/).
+Follow the steps in the installation documentation in [doc/installation.md](doc/installation.md).
 
 
 
