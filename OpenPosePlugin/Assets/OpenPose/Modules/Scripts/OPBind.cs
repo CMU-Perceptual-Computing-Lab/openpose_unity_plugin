@@ -32,11 +32,6 @@ namespace OpenPose {
         [DllImport("openpose")] public static extern void _OPSetDebugEnable(bool enable);
 
         /*
-         * Enable/disable multi-threading
-         */
-        [DllImport("openpose")] public static extern void _OPSetMultiThreadEnable(bool enable);
-
-        /*
          * Enable/disable image output callback. Disable will save some time since data is large.
          */
         [DllImport("openpose")] public static extern void _OPSetImageOutputEnable(bool enable);
@@ -55,7 +50,7 @@ namespace OpenPose {
          * Openpose configurations - please read openpose documentation for explanation
          */
         [DllImport("openpose")] public static extern void _OPConfigurePose(
-            bool enable, int netInputSizeX, int netInputSizeY, // Point
+            byte poseMode, int netInputSizeX, int netInputSizeY, // Point
             int outputSizeX, int outputSizeY, // Point
             byte keypointScaleMode, // ScaleMode
             int gpuNumber, int gpuNumberStart, int scalesNumber, float scaleGap,
@@ -66,7 +61,7 @@ namespace OpenPose {
             bool heatMapAddPAFs, // vector<HeatMapType>
             byte heatMapScaleMode, // ScaleMode
             bool addPartCandidates, float renderThreshold, int numberPeopleMax,
-            bool maximizePositives, double fpsMax, string protoTxtPath, string caffeModelPath
+            bool maximizePositives, double fpsMax, string protoTxtPath, string caffeModelPath, float upsamplingRatio
         );
         [DllImport("openpose")] public static extern void _OPConfigureHand(
             bool enable, byte detector, int netInputSizeX, int netInputSizeY, // Point
@@ -98,6 +93,10 @@ namespace OpenPose {
         [DllImport("openpose")] public static extern void _OPConfigureGui(
             ushort displayMode, // DisplayMode
             bool guiVerbose, bool fullScreen
+        );
+        [DllImport("openpose")] public static extern void _OPConfigureDebugging(
+            byte loggingLevel, // Priority
+			bool disableMultiThread, ulong profileSpeed
         );
     }
 }

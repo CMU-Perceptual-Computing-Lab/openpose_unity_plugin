@@ -37,6 +37,22 @@ namespace OpenPose {
         Image
 	}
 
+    // From OpenPose: op::Priority
+    public enum Priority : byte {
+        None = 0,
+        Low = 1,
+        Normal = 2,
+        High = 3,
+        Max = 4,
+        NoOutput = 255,
+    }
+    // From OpenPose: op::PoseMode
+    public enum PoseMode : byte {
+        Disabled = 0,
+        Enabled,
+        NoNetwork,
+        Size,
+    }
     // From OpenPose: op::Detector
     public enum Detector : byte {
         Body = 0,
