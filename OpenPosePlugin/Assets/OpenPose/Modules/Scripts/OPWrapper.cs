@@ -37,10 +37,6 @@ namespace OpenPose {
         public static void OPEnableOutput(bool enable){
             OPBind._OPSetOutputEnable(enable);
         }
-        // Enable multi-thread (default true). Only set during configure
-        public static void OPEnableMultiThread(bool enable){
-            OPBind._OPSetMultiThreadEnable(enable);
-        }
         // Enable receiving camera image from OpenPose (default false). Can set in run-time
         public static void OPEnableImageOutput(bool enable){
             OPBind._OPSetImageOutputEnable(enable);
@@ -54,6 +50,7 @@ namespace OpenPose {
             OPConfigureInput();
             OPConfigureOutput();
             OPConfigureGui();
+            OPConfigureDebugging();
         }
         // Start OpenPose thread with last configuration parameters
         public static void OPRun() {
@@ -82,9 +79,9 @@ namespace OpenPose {
             }
         }
         // Pose parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigurePose(
-            bool enable = true, Vector2Int? netInputSize = null, Vector2Int? outputSize = null,
+            PoseMode poseMode = PoseMode.Enabled, Vector2Int? netInputSize = null, Vector2Int? outputSize = null,
             ScaleMode keypointScaleMode = ScaleMode.InputResolution,
             int gpuNumber = -1, int gpuNumberStart = 0, int scalesNumber = 1, float scaleGap = 0.3f,
             RenderMode renderMode = RenderMode.Gpu, PoseModel poseModel = PoseModel.BODY_25,
@@ -93,7 +90,7 @@ namespace OpenPose {
             HeatMapType heatMapTypes = HeatMapType.None, ScaleMode heatMapScaleMode = ScaleMode.UnsignedChar,
             bool addPartCandidates = false, float renderThreshold = 0.05f, int numberPeopleMax = -1,
             bool maximizePositives = false, double fpsMax = -1.0,
-            string protoTxtPath = "", string caffeModelPath = ""){
+            string protoTxtPath = "", string caffeModelPath = "", float upsamplingRatio = 0f){
 
             // Other default values
             Vector2Int _netRes = netInputSize ?? new Vector2Int(-1, 368);
@@ -101,7 +98,7 @@ namespace OpenPose {
             modelFolder = modelFolder ?? Application.streamingAssetsPath + "/models/";
 
             OPBind._OPConfigurePose(
-                enable, _netRes.x, _netRes.y, // Point
+                (byte) poseMode, _netRes.x, _netRes.y, // Point
                 _outputRes.x, _outputRes.y, // Point
                 (byte) keypointScaleMode, // ScaleMode
                 gpuNumber, gpuNumberStart, scalesNumber, scaleGap,
@@ -113,11 +110,11 @@ namespace OpenPose {
                 Convert.ToBoolean(heatMapTypes & HeatMapType.PAFs), // vector<HeatMapType>
                 (byte) heatMapScaleMode, // ScaleMode
                 addPartCandidates, renderThreshold, numberPeopleMax,
-                maximizePositives, fpsMax, protoTxtPath, caffeModelPath
+                maximizePositives, fpsMax, protoTxtPath, caffeModelPath, upsamplingRatio
             );
         }
         // Hand parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureHand(
             bool enable = false, Detector detector = Detector.Body, Vector2Int? netInputSize = null,
             int scalesNumber = 1, float scaleRange = 0.4f, RenderMode renderMode = RenderMode.None,
@@ -133,7 +130,7 @@ namespace OpenPose {
             );
         }
         // Face parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureFace(
             bool enable = false, Detector detector = Detector.Body,
             Vector2Int? netInputSize = null, RenderMode renderMode = RenderMode.None,
@@ -149,8 +146,8 @@ namespace OpenPose {
             );
         }
         // Extra parameter configuration (with default value)
-        // NOTICE: 3D output is not yet supported currently
-        // Please see OpenPose documentation for explanation on every parameter
+        // NOTICE: 3D output is not yet supported
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureExtra(
             bool reconstruct3d = false, int minViews3d = -1, bool identification = false, int tracking = -1,
             int ikThreads = 0){
@@ -158,7 +155,7 @@ namespace OpenPose {
             OPBind._OPConfigureExtra(reconstruct3d, minViews3d, identification, tracking, ikThreads);
         }
         // Input parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureInput(
             ProducerType producerType = ProducerType.Webcam, string producerString = "-1",
             ulong frameFirst = 0, ulong frameStep = 1, ulong frameLast = ulong.MaxValue,
@@ -180,7 +177,7 @@ namespace OpenPose {
             );
         }
         // Output parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureOutput(
             double verbose = -1.0, string writeKeypoint = "", DataFormat writeKeypointFormat = DataFormat.Yml,
             string writeJson = "", string writeCocoJson = "", string writeCocoFootJson = "",
@@ -199,7 +196,7 @@ namespace OpenPose {
             );
         }
         // GUI parameter configuration (with default value)
-        // Please see OpenPose documentation for explanation on every parameter
+        // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureGui(
             DisplayMode displayMode = DisplayMode.NoDisplay,
             bool guiVerbose = false, bool fullScreen = false){
@@ -207,6 +204,16 @@ namespace OpenPose {
             OPBind._OPConfigureGui(
                 (ushort) displayMode, // DisplayMode
                 guiVerbose, fullScreen
+            );
+        }
+        // Debugging parameter configuration (with default value)
+        // Please refer to OpenPose documentation for parameter explanation
+        public static void OPConfigureDebugging(
+            Priority loggingLevel = Priority.High, // Priority
+			bool disableMultiThread = false, ulong profileSpeed = 1000){
+            OPBind._OPConfigureDebugging(
+                (byte) loggingLevel, // Priority
+                disableMultiThread, profileSpeed
             );
         }
         # endregion

@@ -1,5 +1,6 @@
 ﻿// OpenPose Unity Plugin v1.0.0alpha-1.5.0
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace OpenPose.Example {
      */
     public class OpenPoseUserScript : MonoBehaviour {
 
-        // The 2D human to control
+        // UI elements
         [SerializeField] Transform humanContainer;
         [SerializeField] ImageRenderer imageRenderer;
         [SerializeField] Text fpsText;
@@ -58,17 +59,14 @@ namespace OpenPose.Example {
         int numberPeople = 0;
 
         // Frame rate calculation
-        [Range(0f, 1f)]
-        public float frameRateSmoothRatio = 0.8f;
+        private int queueMaxCount = 20; 
+        private Queue<float> frameTimeQueue = new Queue<float>();
         private float avgFrameRate = 0f;
-        private float avgFrameTime = -1f;
-        private float lastFrameTime = -1f;
+        private int frameCounter = 0;
 
         private void Start() {
             // Register callbacks
             OPWrapper.OPRegisterCallbacks();
-            // Enable OpenPose run multi-thread (default true)
-            OPWrapper.OPEnableMultiThread(true);
             // Enable OpenPose log to unity (default true)
             OPWrapper.OPEnableDebug(true);
             // Enable OpenPose output to unity (default true)
@@ -87,7 +85,7 @@ namespace OpenPose.Example {
         // User can change the settings here
         private void UserConfigureOpenPose(){
             OPWrapper.OPConfigurePose(
-                /* enable */ true, /* netInputSize */ netResolution, /* outputSize */ null,
+                /* poseMode */ PoseMode.Enabled, /* netInputSize */ netResolution, /* outputSize */ null,
                 /* keypointScaleMode */ ScaleMode.InputResolution,
                 /* gpuNumber */ -1, /* gpuNumberStart */ 0, /* scalesNumber */ 1, /* scaleGap */ 0.3f,
                 /* renderMode */ RenderMode.Gpu, /* poseModel */ PoseModel.BODY_25,
@@ -96,7 +94,7 @@ namespace OpenPose.Example {
                 /* heatMapTypes */ HeatMapType.None, /* heatMapScaleMode */ ScaleMode.UnsignedChar,
                 /* addPartCandidates */ false, /* renderThreshold */ renderThreshold, /* numberPeopleMax */ maxPeople,
                 /* maximizePositives */ false, /* fpsMax fps_max */ -1.0,
-                /* protoTxtPath */ "", /* caffeModelPath */ "");
+                /* protoTxtPath */ "", /* caffeModelPath */ "", /* upsamplingRatio */ 0f);
 
             OPWrapper.OPConfigureHand(
                 /* enable */ handEnabled, /* detector */ Detector.Body, /* netInputSize */ handResolution,
@@ -130,6 +128,9 @@ namespace OpenPose.Example {
 
             OPWrapper.OPConfigureGui(
                 /* displayMode */ DisplayMode.NoDisplay, /* guiVerbose */ false, /* fullScreen */ false);
+            
+            OPWrapper.OPConfigureDebugging(
+                /* loggingLevel */ Priority.High, /* disableMultiThread */ false, /* profileSpeed */ 1000);
         }
 
         private IEnumerator UserRebootOpenPoseCoroutine() {
@@ -164,15 +165,16 @@ namespace OpenPose.Example {
                 peopleText.text = "People: " + numberPeople;
 
                 // Calculate framerate
-                if (lastFrameTime > 0f) {
-                    if (avgFrameTime < 0f) avgFrameTime = Time.time - lastFrameTime;
-                    else {
-                        avgFrameTime = Mathf.Lerp(Time.time - lastFrameTime, avgFrameTime, frameRateSmoothRatio);
-                        avgFrameRate = 1f / avgFrameTime;
-                    }
+                frameTimeQueue.Enqueue(Time.time);
+                frameCounter++;
+                if (frameTimeQueue.Count > queueMaxCount){ // overflow
+                    frameTimeQueue.Dequeue();
                 }
-                lastFrameTime = Time.time;
-                fpsText.text = avgFrameRate.ToString("F1") + " FPS";
+                if (frameCounter >= queueMaxCount){ // update frame rate
+                    frameCounter = 0;
+                    avgFrameRate = frameTimeQueue.Count / (Time.time - frameTimeQueue.Peek());
+                    fpsText.text = avgFrameRate.ToString("F1") + " FPS";
+                }
             }
         }
     }
