@@ -170,7 +170,7 @@ namespace OpenPose.Example {
                 if (frameTimeQueue.Count > queueMaxCount){ // overflow
                     frameTimeQueue.Dequeue();
                 }
-                if (frameCounter >= queueMaxCount){ // update frame rate
+                if (frameCounter >= queueMaxCount || frameTimeQueue.Count <= 5){ // update frame rate
                     frameCounter = 0;
                     avgFrameRate = frameTimeQueue.Count / (Time.time - frameTimeQueue.Peek());
                     fpsText.text = avgFrameRate.ToString("F1") + " FPS";
