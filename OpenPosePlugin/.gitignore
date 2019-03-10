@@ -50,9 +50,15 @@ Corridor/Library/metadata/
 # ============= #
 # OpenPose plugins
 /Assets/OpenPose/Plugins/
+/Assets/OpenPose/Plugins.meta
 # Caffe models
 /Assets/StreamingAssets/models/pose/body_25/pose_iter_584000.caffemodel
+/Assets/StreamingAssets/models/pose/body_25/pose_iter_584000.caffemodel.meta
 /Assets/StreamingAssets/models/pose/coco/pose_iter_440000.caffemodel
+/Assets/StreamingAssets/models/pose/coco/pose_iter_440000.caffemodel.meta
 /Assets/StreamingAssets/models/pose/mpi/pose_iter_160000.caffemodel
+/Assets/StreamingAssets/models/pose/mpi/pose_iter_160000.caffemodel.meta
 /Assets/StreamingAssets/models/face/pose_iter_116000.caffemodel
+/Assets/StreamingAssets/models/face/pose_iter_116000.caffemodel.meta
 /Assets/StreamingAssets/models/hand/pose_iter_102000.caffemodel
+/Assets/StreamingAssets/models/hand/pose_iter_102000.caffemodel.meta
