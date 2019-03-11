@@ -138,6 +138,9 @@ namespace OpenPose.Example {
             // Shutdown if running
             if (OPWrapper.state == OPState.Running) {
                 OPWrapper.OPShutdown();
+                // Reset framerate calculator
+                frameTimeQueue.Clear();
+                frameCounter = 0;
             }
             // Wait until fully stopped
             yield return new WaitUntil( ()=>{ return OPWrapper.state == OPState.Ready; } );
@@ -147,8 +150,8 @@ namespace OpenPose.Example {
         }
 
         private void Update() {
-            // New data received
-            if (OPWrapper.OPGetOutput(out datum)){
+            // Try getting new frame
+            if (OPWrapper.OPGetOutput(out datum)){ // true: has new frame data
 
                 // Draw human in data
                 int i = 0;

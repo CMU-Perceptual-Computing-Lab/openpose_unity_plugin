@@ -1,6 +1,6 @@
 ﻿// OpenPose Unity Plugin v1.0.0alpha-1.5.0
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using UnityEngine;
@@ -17,7 +17,7 @@ namespace OpenPose {
 
         // Output
         private static OPDatum currentData;
-        private static bool dataFlag = false;
+        private static Queue<OPDatum> dataBuffer = new Queue<OPDatum>();
 
         // Thread
         private static Thread opThread;
@@ -63,11 +63,15 @@ namespace OpenPose {
                 Debug.LogWarning("Trying to start, while OpenPose already started or not ready");
             }
         }
-        // Get output if output arrives IN THIS FRAME.
-        // Suggested to call this function in Update()
+        // Get NEXT output frame. Note that frame is possible to be omitted if buffer size overflow. 
         public static bool OPGetOutput(out OPDatum data){
-            data = currentData;
-            return dataFlag;
+            if (dataBuffer.Count > 0){
+                data = dataBuffer.Dequeue();
+                return true;
+            } else {
+                data = new OPDatum();
+                return false;
+            }
         }
         // Stop OpenPose if running
         public static void OPShutdown() {
@@ -218,23 +222,26 @@ namespace OpenPose {
         }
         # endregion
 
-        # region Unity callbacks
+        # region Unity callbacks for OpenPose
         // Log callback
         private static OPBind.DebugCallback OPLog = delegate(string message, int type){
             switch (type){
                 case 0: Debug.Log("OP_Log: " + message); break;
                 case 1: Debug.LogWarning("OP_Warning: " + message); break;
-                case -1: Debug.LogError("OP_Error: " + message);
-                    //opThread.Abort();
-                    break;
+                case -1: Debug.LogError("OP_Error: " + message); break;
             }
         };
 
         // Output callback
         private static OPBind.OutputCallback OPOutput = delegate(IntPtr ptrPtr, int ptrSize, IntPtr sizePtr, int sizeSize, byte outputType){
-            // End of frame signal is received, turn on the flag
+            // End of frame signal is received, store data into buffer
             if ((OutputType)outputType == OutputType.None) {
-                dataFlag = true;
+                dataBuffer.Enqueue(currentData);
+                currentData = new OPDatum();
+                // Control the buffer size no greater than 10
+                if (dataBuffer.Count > 10){
+                    dataBuffer.Dequeue();
+                }
                 return;
             }
 
@@ -266,22 +273,13 @@ namespace OpenPose {
         # endregion
 
         # region MonoBehaviour
-        private IEnumerator Start() {
+        private void Start() {
             // Change state
             state = OPState.Ready;
-            // Check if data receive finished every frame
-            while (true) {
-                // New data finished
-                yield return new WaitForEndOfFrame();
-                if (dataFlag) {
-                    dataFlag = false;
-                    currentData = new OPDatum();
-                }
-            }
         }
 
         private void OnDestroy() {
-            // Stop openpose
+            // Stop openpose if wrapper is destroyed
             if (state == OPState.Running) OPShutdown();
         }
         # endregion
