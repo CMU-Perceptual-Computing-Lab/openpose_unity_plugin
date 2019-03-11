@@ -8,7 +8,7 @@ SET WGET_EXE=..\..\..\3rdparty\wget\wget.exe
 echo ----- Downloading Plugins -----
 SET OPENPOSE_UNITY_URL=http://posefs1.perception.cs.cmu.edu/OpenPose/unity/
 SET PLUGINS_FOLDER=Plugins\
-SET ZIP_NAME=Plugins_2019_02_10.zip
+SET ZIP_NAME=Plugins_2019_02_21.zip
 SET ZIP_FULL_PATH=%PLUGINS_FOLDER%%ZIP_NAME%
 %WGET_EXE% -c %OPENPOSE_UNITY_URL%%ZIP_NAME% -P %PLUGINS_FOLDER%
 echo:
