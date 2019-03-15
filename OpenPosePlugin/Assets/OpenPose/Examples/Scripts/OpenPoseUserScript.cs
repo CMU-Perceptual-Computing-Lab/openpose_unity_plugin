@@ -120,7 +120,7 @@ namespace OpenPose.Example {
 
             OPWrapper.OPConfigureOutput(
                 /* verbose */ -1.0, /* writeKeypoint */ "", /* writeKeypointFormat */ DataFormat.Yml,
-                /* writeJson */ "", /* writeCocoJson */ "", /* writeCocoFootJson */ "",
+                /* writeJson */ "", /* writeCocoJson */ "", /* writeCocoJsonVariants */ 1,
                 /* writeCocoJsonVariant */ 1, /* writeImages */ "", /* writeImagesFormat */ "png",
                 /* writeVideo */ "", /* writeVideoFps */ 30.0, /* writeVideoWithAudio */ false,
                 /* writeHeatMaps */ "", /* writeHeatMapsFormat */ "png", /* writeVideo3D */ "",
