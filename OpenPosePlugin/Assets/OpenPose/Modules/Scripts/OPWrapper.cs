@@ -184,7 +184,7 @@ namespace OpenPose {
         // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureOutput(
             double verbose = -1.0, string writeKeypoint = "", DataFormat writeKeypointFormat = DataFormat.Yml,
-            string writeJson = "", string writeCocoJson = "", string writeCocoFootJson = "",
+            string writeJson = "", string writeCocoJson = "", int writeCocoJsonVariants = 1,
             int writeCocoJsonVariant = 1, string writeImages = "", string writeImagesFormat = "png",
             string writeVideo = "", double writeVideoFps = 30.0, bool writeVideoWithAudio = false, string writeHeatMaps = "",
             string writeHeatMapsFormat = "png", string writeVideo3D = "", string writeVideoAdam = "",
@@ -192,7 +192,7 @@ namespace OpenPose {
 
             OPBind._OPConfigureOutput(
                 verbose, writeKeypoint, (byte) writeKeypointFormat, // DataFormat
-                writeJson, writeCocoJson, writeCocoFootJson, 
+                writeJson, writeCocoJson, writeCocoJsonVariants, 
                 writeCocoJsonVariant, writeImages, writeImagesFormat, 
                 writeVideo, writeVideoFps, writeVideoWithAudio, writeHeatMaps, 
                 writeHeatMapsFormat, writeVideo3D, writeVideoAdam, 

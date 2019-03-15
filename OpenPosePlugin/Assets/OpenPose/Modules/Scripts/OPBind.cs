@@ -85,7 +85,7 @@ namespace OpenPose {
         );
         [DllImport("openpose")] public static extern void _OPConfigureOutput(
             double verbose, string writeKeypoint, byte writeKeypointFormat, // DataFormat
-            string writeJson, string writeCocoJson, string writeCocoFootJson, int writeCocoJsonVariant,
+            string writeJson, string writeCocoJson, int writeCocoJsonVariants, int writeCocoJsonVariant,
             string writeImages, string writeImagesFormat, string writeVideo, double writeVideoFps, bool writeVideoWithAudio,
             string writeHeatMaps, string writeHeatMapsFormat, string writeVideo3D, string writeVideoAdam,
             string writeBvh, string udpHost, string udpPort
