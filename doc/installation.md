@@ -25,11 +25,12 @@ If you update the OpenPose Unity Plugin version and it start crashing, most prob
     1. [Install the OpenPose prerequisites](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md#prerequisites).
     2. [Install OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) and make sure the `BUILD_UNITY_SUPPORT` flag is enabled in CMake-GUI.
     3. Make sure that OpenPose works properly by [running the default examples](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/quick_start.md#quick-start).
-    4. Note: Only Visual Studio 2015 Enterprise Update 3, CUDA 8, and cuDNN 5.1 are officially supported and tested in order to compile the C++ OpenPose library. VS versions different to 2015 or CUDA versions different to 8 are not officially supported. They might or might not get support in the future. In order to use a different version, just make sure you can run the OpenPose examples with that software. Unity installs by default VS Community 2017. If you installed already VS 2017 and you desire to use OpenPose with VS 2015 Enterprise Update 3, you have to:
+    4. **Note: OpenPose has been tested extensively with CUDA 10.0 / cuDNN 7.5 for VS2017 and CUDA 8.0 / cuDNN 5.1 for VS 2015.** We highly recommend using those versions to minimize potential installation issues. Other versions should also work, but we do not provide support about any CUDA/cuDNN installation/compilation issue, as well as problems related to their integration into OpenPose.
+    5. If you desire to use OpenPose with VS 2015 and you already installed VS 2017, you have to:
         1. Uninstall VS 2015 and 2017.
         2. Install the OpenPose prerequisites (VS 2015, CUDA 8, cuDNN 5.1). Not re-installing VS 2015 after uninstalling VS 2017 might lead to really cryptic bugs in VS 2015 when compiling OpenPose.
         3. Install OpenPose following the above steps.
-    5. Install Unity without VS Community 2017 (so Unity will automatically use the same existing VS version than OpenPose uses). Tested and officially supported only for Unity versions higher or equal than 2018.2.9f1.
+    6. Unity versions tested and officially supported only for higher or equal than 2018.2.9f1. Lower versions might also work. 
 
 
 
