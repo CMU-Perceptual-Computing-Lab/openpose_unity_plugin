@@ -27,7 +27,7 @@ namespace OpenPose {
 				default: Debug.Log("Output type not supported yet: " + type); break;
 			}
 		}
-
+        // Parse id, subId, subIdMax, frameNumber
 		public static void ParseDatumsInfo(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 4, "DatumsInfo array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 1, "DatumsInfo size length invalid: " + sizeArray.Length);
@@ -41,13 +41,13 @@ namespace OpenPose {
 			datum.subIdMax = (ulong)temp[2];
 			datum.frameNumber = (ulong)temp[3];
 		}
-
-		public static void ParseName(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse name
+        public static void ParseName(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "Name array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 1, "Name size length invalid: " + sizeArray.Length);
 			datum.name = Marshal.PtrToStringAnsi(ptrArray[0]);
 		}
-
+        // Parse poseKeypoints
 		public static void ParsePoseKeypoints(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "PoseKeypoints array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 3, "PoseKeypoints size length invalid: " + sizeArray.Length);
@@ -59,7 +59,7 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.poseKeypoints = new MultiArray<float>(valArray, sizeArray);
 		}
-
+        // Parse poseIds
 		public static void ParsePoseIds(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "PoseIds array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 1, "PoseIds size length invalid: " + sizeArray.Length);
@@ -71,8 +71,8 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.poseIds = new MultiArray<long>(valArray, sizeArray);
 		}
-
-		public static void ParsePoseScores(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse poseScores
+        public static void ParsePoseScores(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "PoseScores array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 1, "PoseScores size length invalid: " + sizeArray.Length);
             int volume = 1;
@@ -83,8 +83,8 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.poseScores = new MultiArray<float>(valArray, sizeArray);
 		}
-
-		public static void ParsePoseHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse poseHeatMaps
+        public static void ParsePoseHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "PoseHeatMaps array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 3, "PoseHeatMaps size length invalid: " + sizeArray.Length);
             int volume = 1;
@@ -95,8 +95,8 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.poseHeatMaps = new MultiArray<float>(valArray, sizeArray);
 		}
-		
-		public static void ParseHandKeypoints(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse handKeypoints
+        public static void ParseHandKeypoints(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 2, "HandKeypoints array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 3, "HandKeypoints size length invalid: " + sizeArray.Length);
 			int volume = 1;
@@ -114,8 +114,8 @@ namespace OpenPose {
 
 			datum.handKeypoints = new Pair<MultiArray<float>>(handKeypointsL, handKeypointsR);
 		}
-
-		public static void ParseHandRectangles(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse handRectangles
+        public static void ParseHandRectangles(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(sizeArray.Length == 2, "HandKeypoints size length invalid: " + sizeArray.Length);
 			Debug.AssertFormat(sizeArray[0] == 2 && sizeArray[1] == 4, "HandKeypoints sizes invalid");
 			datum.handRectangles = new List<Pair<Rect>>();
@@ -127,8 +127,8 @@ namespace OpenPose {
 				datum.handRectangles.Add(new Pair<Rect>(left, right));
 			}
 		}
-
-		public static void ParseHandHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse handHeatMaps
+        public static void ParseHandHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 2, "HandHeatMaps array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 4, "HandHeatMaps size length invalid: " + sizeArray.Length);
             int volume = 1;
@@ -146,8 +146,8 @@ namespace OpenPose {
 
 			datum.handHeatMaps = new Pair<MultiArray<float>>(handHeatMapsL, handHeatMapsR);
 		}
-
-		public static void ParseFaceKeypoints(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse faceKeypoints
+        public static void ParseFaceKeypoints(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "FaceKeypoints array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 3, "FaceKeypoints size length invalid: " + ptrArray.Length);
             int volume = 1;
@@ -158,8 +158,8 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.faceKeypoints = new MultiArray<float>(valArray, sizeArray);
 		}
-
-		public static void ParseFaceRectangles(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse faceRectangles
+        public static void ParseFaceRectangles(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "FaceRect array length is invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 2, "FaceRect size length is invalid: " + sizeArray.Length);
             int volume = 1;
@@ -169,6 +169,7 @@ namespace OpenPose {
 			var valArray = new float[volume];
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 
+            // Using UnityEngine.Rect
 			var list = new List<Rect>();
 			for (int i = 0; i < sizeArray[0]; i++){
 				list.Add(new Rect(valArray[i * 4 + 0], valArray[i * 4 + 1], valArray[i * 4 + 2], valArray[i * 4 + 3]));
@@ -176,8 +177,8 @@ namespace OpenPose {
 			
 			datum.faceRectangles = list;
 		}
-	
-		public static void ParseFaceHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse faceHeatMaps
+        public static void ParseFaceHeatMaps(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "FaceHeatMaps array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 4, "FaceHeatMaps size length invalid: " + sizeArray.Length);
             int volume = 1;
@@ -188,8 +189,8 @@ namespace OpenPose {
 			Marshal.Copy(ptrArray[0], valArray, 0, volume);
 			datum.faceHeatMaps = new MultiArray<float>(valArray, sizeArray);
 		}
-	
-		public static void ParseImage(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
+        // Parse cvInputData
+        public static void ParseImage(ref OPDatum datum, IntPtr[] ptrArray, int[] sizeArray){
 			Debug.AssertFormat(ptrArray.Length == 1, "Image array length invalid: " + ptrArray.Length);
 			Debug.AssertFormat(sizeArray.Length == 3, "Image size length invalid: " + sizeArray.Length);
             int volume = 1;

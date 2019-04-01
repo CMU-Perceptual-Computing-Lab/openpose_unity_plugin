@@ -12,7 +12,7 @@ namespace OpenPose {
     public class OPWrapper : MonoBehaviour {
 
         # region Properties
-        // State
+        // OpenPose state
         public static OPState state { get; private set; }
 
         // Output
@@ -267,7 +267,11 @@ namespace OpenPose {
             // Start OP with output callback
             OPBind._OPRun();
 
-            // Thread end, change state
+            // Thread end, clean up
+            dataBuffer.Clear();
+            currentData = new OPDatum();
+
+            // Change state
             state = OPState.Ready;
         }
         # endregion
