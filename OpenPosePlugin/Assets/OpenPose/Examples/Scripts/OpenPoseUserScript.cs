@@ -111,7 +111,7 @@ namespace OpenPose.Example {
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.4f);
 
             OPWrapper.OPConfigureExtra(
-                /* reconstruct3d */ false, /* minViews3d */ -1, /* identification */ false, /* tracking */ 1,
+                /* reconstruct3d */ false, /* minViews3d */ -1, /* identification */ false, /* tracking */ -1,
                 /* ikThreads */ 0);
 
             OPWrapper.OPConfigureInput(
