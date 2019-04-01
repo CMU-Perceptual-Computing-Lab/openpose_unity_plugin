@@ -15,8 +15,8 @@ namespace OpenPose {
     // Output type for output callback
 	public enum OutputType : byte {
 		None,               // Default value, also use as end of frame signal
-		DatumsInfo,         // Contains
-		Name,
+		DatumsInfo,         // Includes: id, subId, subIdMax, frameNumber
+        Name,
 		PoseKeypoints,
 		PoseIds,
 		PoseScores,
