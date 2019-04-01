@@ -21,7 +21,7 @@ namespace OpenPose.Example {
 		// Face rectangle
 		[SerializeField] RectTransform faceRect;
 		
-        private RectTransform rectTransform { get { return GetComponent<RectTransform>(); } }
+        private RectTransform rectTransform { get { return transform as RectTransform; } }
         private Image image { get { return GetComponent<Image>(); } }
 
 		private bool findKeypointsRect(RectTransform[] keypoints, out Rect rect){

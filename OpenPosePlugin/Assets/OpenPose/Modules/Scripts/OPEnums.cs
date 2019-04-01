@@ -6,16 +6,16 @@ using UnityEngine;
 namespace OpenPose {
 
     public enum OPState : byte {
-        None,
-        Ready,
-        Running,
-        Stopping
+        None,               // Default value, not used
+        Ready,              // OP not yet started and ready to start
+        Running,            // OP is running (or starting)
+        Stopping            // OP received stop signal but not fully stopped
     }
 
     // Output type for output callback
 	public enum OutputType : byte {
-		None,
-		DatumsInfo,
+		None,               // Default value, also use as end of frame signal
+		DatumsInfo,         // Contains
 		Name,
 		PoseKeypoints,
 		PoseIds,

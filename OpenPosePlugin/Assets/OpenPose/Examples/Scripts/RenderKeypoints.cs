@@ -12,7 +12,8 @@ namespace OpenPose.Example {
         // Bone ends
         public RectTransform Joint0, Joint1;
 
-        private LineRenderer lineRenderer { get { return GetComponent<LineRenderer>(); } }
+        private LineRenderer _lr;
+        private LineRenderer lineRenderer { get { if (!_lr) _lr = GetComponent<LineRenderer>(); return _lr; } }
 
         // Update is called once per frame
         void Update() {

@@ -6,20 +6,25 @@ using UnityEngine.UI;
 
 namespace OpenPose.Example {
     /*
-     * User of OPWrapper
+     * User example of using OPWrapper
      */
     public class OpenPoseUserScript : MonoBehaviour {
 
+        // HumanController2D prefab
+        [SerializeField] GameObject humanPrefab;
+
         // UI elements
+        [SerializeField] RectTransform outputTransform;
+        [SerializeField] ImageRenderer bgImageRenderer;
         [SerializeField] Transform humanContainer;
-        [SerializeField] ImageRenderer imageRenderer;
         [SerializeField] Text fpsText;
         [SerializeField] Text peopleText;
+        [SerializeField] Text stateText;
 
-        // Output control
+        // Output
         private OPDatum datum;
 
-        // User settings
+        // OpenPose settings
         public ProducerType inputType = ProducerType.Webcam;
         public string producerString = "-1";
         public int maxPeople = -1;
@@ -51,8 +56,7 @@ namespace OpenPose.Example {
         public bool renderBgImg = false;
         public void ToggleRenderBgImg(){
             renderBgImg = !renderBgImg;
-            OPWrapper.OPEnableImageOutput(renderBgImg);
-            imageRenderer.FadeInOut(renderBgImg);
+            bgImageRenderer.FadeInOut(renderBgImg);
         }
 
         // Number of people
@@ -72,7 +76,7 @@ namespace OpenPose.Example {
             // Enable OpenPose output to unity (default true)
             OPWrapper.OPEnableOutput(true);
             // Enable receiving image (default false)
-            OPWrapper.OPEnableImageOutput(renderBgImg);
+            OPWrapper.OPEnableImageOutput(true);
 
             // Configure OpenPose with default value, or using specific configuration for each
             /* OPWrapper.OPConfigureAllInDefault(); */
@@ -82,7 +86,7 @@ namespace OpenPose.Example {
             OPWrapper.OPRun();
         }
 
-        // User can change the settings here
+        // Parameters can be set here
         private void UserConfigureOpenPose(){
             OPWrapper.OPConfigurePose(
                 /* poseMode */ PoseMode.Enabled, /* netInputSize */ netResolution, /* outputSize */ null,
@@ -107,7 +111,7 @@ namespace OpenPose.Example {
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.4f);
 
             OPWrapper.OPConfigureExtra(
-                /* reconstruct3d */ false, /* minViews3d */ -1, /* identification */ false, /* tracking */ -1,
+                /* reconstruct3d */ false, /* minViews3d */ -1, /* identification */ false, /* tracking */ 1,
                 /* ikThreads */ 0);
 
             OPWrapper.OPConfigureInput(
@@ -150,24 +154,37 @@ namespace OpenPose.Example {
         }
 
         private void Update() {
+            // Update state in UI
+            stateText.text = OPWrapper.state.ToString();
+
             // Try getting new frame
             if (OPWrapper.OPGetOutput(out datum)){ // true: has new frame data
 
-                // Draw human in data
-                int i = 0;
-                foreach (var human in humanContainer.GetComponentsInChildren<HumanController2D>()){
-                    human.DrawHuman(ref datum, i++, renderThreshold);
-                }
+                // Update background image
+                bgImageRenderer.UpdateImage(datum.cvInputData);
 
-                // Draw image
-                imageRenderer.UpdateImage(datum.cvInputData);
+                // Rescale output UI
+                Vector2 outputSize = outputTransform.sizeDelta;
+                Vector2 screenSize = Camera.main.pixelRect.size;
+                float scale = Mathf.Min(screenSize.x / outputSize.x, screenSize.y / outputSize.y);
+                outputTransform.localScale = new Vector3(scale, scale, scale);
 
-                // Number of people
+                // Update number of people in UI
                 if (datum.poseKeypoints == null || datum.poseKeypoints.Empty()) numberPeople = 0;
                 else numberPeople = datum.poseKeypoints.GetSize(0);
                 peopleText.text = "People: " + numberPeople;
 
-                // Calculate framerate
+                // Draw human
+                while (humanContainer.childCount < numberPeople) { // Make sure no. of HumanControllers no less than numberPeople
+                    Instantiate(humanPrefab, humanContainer);
+                }
+                int i = 0;
+                foreach (var human in humanContainer.GetComponentsInChildren<HumanController2D>()) {
+                    // When i >= no. of human, the human will be hidden
+                    human.DrawHuman(ref datum, i++, renderThreshold);
+                }
+
+                // Update framerate in UI
                 frameTimeQueue.Enqueue(Time.time);
                 frameCounter++;
                 if (frameTimeQueue.Count > queueMaxCount){ // overflow
