@@ -99,6 +99,7 @@ namespace OpenPose {
 	// From OpenPose: op::RenderMode
     public enum RenderMode : byte {
         None,
+        Auto, // It will select Gpu if CUDA verison, or Cpu otherwise
         Cpu,
         Gpu,
     }

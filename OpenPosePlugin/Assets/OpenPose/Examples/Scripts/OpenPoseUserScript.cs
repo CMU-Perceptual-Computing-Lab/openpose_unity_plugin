@@ -91,23 +91,23 @@ namespace OpenPose.Example {
             OPWrapper.OPConfigurePose(
                 /* poseMode */ PoseMode.Enabled, /* netInputSize */ netResolution, /* outputSize */ null,
                 /* keypointScaleMode */ ScaleMode.InputResolution,
-                /* gpuNumber */ -1, /* gpuNumberStart */ 0, /* scalesNumber */ 1, /* scaleGap */ 0.3f,
-                /* renderMode */ RenderMode.Gpu, /* poseModel */ PoseModel.BODY_25,
+                /* gpuNumber */ -1, /* gpuNumberStart */ 0, /* scalesNumber */ 1, /* scaleGap */ 0.25f,
+                /* renderMode */ RenderMode.Auto, /* poseModel */ PoseModel.BODY_25,
                 /* blendOriginalFrame */ true, /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f,
                 /* defaultPartToRender */ 0, /* modelFolder */ null,
-                /* heatMapTypes */ HeatMapType.None, /* heatMapScaleMode */ ScaleMode.UnsignedChar,
+                /* heatMapTypes */ HeatMapType.None, /* heatMapScaleMode */ ScaleMode.ZeroToOne,
                 /* addPartCandidates */ false, /* renderThreshold */ renderThreshold, /* numberPeopleMax */ maxPeople,
                 /* maximizePositives */ false, /* fpsMax fps_max */ -1.0,
                 /* protoTxtPath */ "", /* caffeModelPath */ "", /* upsamplingRatio */ 0f);
 
             OPWrapper.OPConfigureHand(
                 /* enable */ handEnabled, /* detector */ Detector.Body, /* netInputSize */ handResolution,
-                /* scalesNumber */ 1, /* scaleRange */ 0.4f, /* renderMode */ RenderMode.None,
+                /* scalesNumber */ 1, /* scaleRange */ 0.4f, /* renderMode */ RenderMode.Auto,
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.2f);
 
             OPWrapper.OPConfigureFace(
                 /* enable */ faceEnabled, /* detector */ Detector.Body, 
-                /* netInputSize */ faceResolution, /* renderMode */ RenderMode.None,
+                /* netInputSize */ faceResolution, /* renderMode */ RenderMode.Auto,
                 /* alphaKeypoint */ 0.6f, /* alphaHeatMap */ 0.7f, /* renderThreshold */ 0.4f);
 
             OPWrapper.OPConfigureExtra(
@@ -123,10 +123,10 @@ namespace OpenPose.Example {
                 /* undistortImage */ false, /* numberViews */ -1);
 
             OPWrapper.OPConfigureOutput(
-                /* verbose */ -1.0, /* writeKeypoint */ "", /* writeKeypointFormat */ DataFormat.Yml,
+                /* verbose */ -1.0, /* writeKeypoint */ "", /* writeKeypointFormat */ DataFormat.Xml,
                 /* writeJson */ "", /* writeCocoJson */ "", /* writeCocoJsonVariants */ 1,
                 /* writeCocoJsonVariant */ 1, /* writeImages */ "", /* writeImagesFormat */ "png",
-                /* writeVideo */ "", /* writeVideoFps */ 30.0, /* writeVideoWithAudio */ false,
+                /* writeVideo */ "", /* writeVideoFps */ -1.0, /* writeVideoWithAudio */ false,
                 /* writeHeatMaps */ "", /* writeHeatMapsFormat */ "png", /* writeVideo3D */ "",
                 /* writeVideoAdam */ "", /* writeBvh */ "", /* udpHost */ "", /* udpPort */ "8051");
 
