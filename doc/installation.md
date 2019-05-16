@@ -15,10 +15,11 @@
 
 ## Running the OpenPose Unity Demo
 - Clone or download the project into your local machine, and open your root folder. 
-- Run `getPlugins.bat`. This will automatically download and unzip OpenPose binaries and copy dlls to Unity. (After this step, feel free to delete `openpose-binary` folder if you don't need it anymore.)
+- Run `getPlugins.bat`. This will automatically download and unzip OpenPose binaries and copy dlls to Unity. (After this step, it's OK to delete `openpose-binary` folder if you don't need it anymore.)
 - Run `getModels.bat`. This will automatically download required models for OpenPose.
 - Open scene `Demo.unity` (located in `OpenPosePlugin/Assets/OpenPose/Examples/Scenes/`) in Unity and click "run".
 - (Optional) Read the [UML diagram](./OpenPoseUnityPlugin_UML.pdf) for more information.
+
 
 
 ## Having issues
@@ -27,15 +28,18 @@ If you are having fatal issues (e.g. Unity crashes) in running Unity Demo, pleas
  - Go to the root folder and run `testBinary.bat`. This will run OpenPose binary demo in video mode. If successful, OpenPose window should appear and a video should play slowly, with markers on the human bodies. 
  - If the binary runs well but Unity still crashes, please report the issue in GitHub with your specific information. 
  - If the binary fails, there might be the following reasons: 
+   1. Your GPU has not enough memory: You may try reducing resolution or running in CPU mode in OpenPose binary. Please edit `testBinary.bat` and follow the comments inside. 
+   2. Placeholder for other possible reasons 
+ - If things still break, please report the issue in GitHub and we will look into that. 
  
 
 
 ## Updating OpenPose Unity Plugin
-If you update the OpenPose Unity Plugin version and it start crashing, most probably the OpenPose DLL code has been modified. If so, you should re-run `getPlugins.bat` in the root folder.
+When updating OpenPose Unity Plugin, make sure to re-run `getPlugins.bat` in the root folder. Or it would probably cause Unity to crash. If issue happens, refer to the session above to check. 
 
 
 
-## Prerequisites
+## Advanced options
 - If you plan to use the default OpenPose DLL (recommended):
     - Make sure that the [latest OpenPose portable demo](https://github.com/CMU-Perceptual-Computing-Lab/openpose/releases) works properly by running the default examples following the [OpenPose doc/quick_start.md#quick-start](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/quick_start.md#quick-start).
 - If you also plan to compile and install the OpenPose C++ library on the same machine (e.g., if you plan to use the latest GitHub version rather than the latest official release or if you intend to modify the OpenPose C++ library):
