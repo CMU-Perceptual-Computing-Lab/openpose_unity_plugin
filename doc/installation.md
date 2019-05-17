@@ -8,20 +8,39 @@
 
 
 ## Software Versions
-- Unity versions higher or equal than 2018.2.9f1. Previous versions may work as well.
+- Unity versions higher or equal than 2018.3. Previous versions may work as well.
 - [**OpenPose**](https://github.com/CMU-Perceptual-Computing-Lab/openpose) version 1.5 or newer (version 1.5 comes by default).
 
 
 
+## Running the OpenPose Unity Demo
+- Clone or download the project into your local machine, and open your root folder. 
+- Run `getPlugins.bat`. This will automatically download and unzip OpenPose binaries and copy dlls to Unity. (After this step, it's OK to delete `openpose-binary` folder if you don't need it anymore.)
+- Run `getModels.bat`. This will automatically download required models for OpenPose.
+- Open scene `Demo.unity` (located in `OpenPosePlugin/Assets/OpenPose/Examples/Scenes/`) in Unity and click "run".
+- (Optional) Read the [UML diagram](./OpenPoseUnityPlugin_UML.pdf) for more information.
+
+
+
+## Having issues
+If you are having fatal issues (e.g. Unity crashes) in running Unity Demo, please follow these steps to check: 
+ - Re-run `getPlugins.bat` and `getModels.bat` and try again. 
+ - Go to the root folder and run `testBinary.bat`. This will run OpenPose binary demo in video mode. If successful, OpenPose window should appear and a video should play slowly, with markers on the human bodies. 
+ - If the binary runs well but Unity still crashes, please report the issue in GitHub with your specific information. 
+ - If the binary fails, there might be the following reasons: 
+   1. Your GPU has not enough memory: You may try reducing resolution or running in CPU mode in OpenPose binary. Please edit `testBinary.bat` and follow the comments inside. Then do the same settings in Unity. 
+   2. Placeholder for other possible reasons 
+ - If things still break, please report the issue in GitHub and we will look into that. 
+ 
+
+
 ## Updating OpenPose Unity Plugin
-If you update the OpenPose Unity Plugin version and it start crashing, most probably the OpenPose DLL code has been modified. If so, you should remove `OpenPosePlugin/Assets/OpenPose/Plugins` and `OpenPosePlugin/Assets/OpenPose/Plugins_YYYY_MM_DD.zip` and re-run `getPlugins.bat` (located in `OpenPosePlugin/Assets/OpenPose/`).
+When updating OpenPose Unity Plugin, make sure to re-run `getPlugins.bat` in the root folder. Or it would probably cause Unity to crash. If issue happens, refer to the session above to check. 
 
 
 
-## Prerequisites
-- If you plan to use the default OpenPose DLL (recommended):
-    - Make sure that the [latest OpenPose portable demo](https://github.com/CMU-Perceptual-Computing-Lab/openpose/releases) works properly by running the default examples following the [OpenPose doc/quick_start.md#quick-start](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/quick_start.md#quick-start).
-- If you also plan to compile and install the OpenPose C++ library on the same machine (e.g., if you plan to use the latest GitHub version rather than the latest official release or if you intend to modify the OpenPose C++ library):
+## Advanced options
+- If you plan to compile and install the OpenPose C++ library on the same machine (e.g., if you plan to use the latest GitHub version rather than the latest official release or if you intend to modify the OpenPose C++ library):
     1. [Install the OpenPose prerequisites](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md#prerequisites).
     2. [Install OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md) and make sure the `BUILD_UNITY_SUPPORT` flag is enabled in CMake-GUI.
     3. Make sure that OpenPose works properly by [running the default examples](https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/quick_start.md#quick-start).
@@ -31,16 +50,6 @@ If you update the OpenPose Unity Plugin version and it start crashing, most prob
         2. Install the OpenPose prerequisites (VS 2015, CUDA 8, cuDNN 5.1). Not re-installing VS 2015 after uninstalling VS 2017 might lead to really cryptic bugs in VS 2015 when compiling OpenPose.
         3. Install OpenPose following the above steps.
     6. Unity versions tested and officially supported only for higher or equal than 2018.2.9f1. Lower versions might also work. 
-
-
-
-## Running the OpenPose Unity Demo
-- Clone or download the project into your local machine.
-- Go to `OpenPosePlugin/Assets/OpenPose/` folder and run `getPlugins.bat`. This will automatically download and unzip OpenPose plugins.
-- Go to `OpenPosePlugin/Assets/StreamingAssets/models/` folder and run `getModels.bat`. This will automatically download required models for OpenPose.
-- Open Unity editor and run the `Demo.unity` in `OpenPosePlugin/Assets/OpenPose/Examples/Scenes/`.
-- (Optional) Read the [UML diagram](./OpenPoseUnityPlugin_UML.pdf) for more information.
-
 
 
 ## Extra information
