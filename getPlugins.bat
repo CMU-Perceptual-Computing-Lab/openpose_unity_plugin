@@ -33,7 +33,7 @@ ren %FOLDER_NAME% %BINARY_FOLDER%
 echo:
 
 echo ----- Deleting Temporary Zip File %PACKAGE_NAME%%ZIP_EXT% -----
-del /q "%PACKAGE_NAME%"%ZIP_EXT%
+del /q "%PACKAGE_NAME%%ZIP_EXT%"
 echo: 
 
 echo ----- Copying Plugins -----
