@@ -7,7 +7,7 @@ SET GET_MODELS=.\getModels.bat
 SET DEMO=.\bin\OPenPoseDemo.exe
 SET ARGS=--video .\examples\media\video.avi
 SET ARGS_LOWRES=%ARGS% --net_resolution -1x80
-SET ARGS_CPU=ARGS% --render_pose 1
+SET ARGS_CPU=%ARGS% --render_pose 1
 
 echo ----- Entering binary root folder %BINARY_ROOT% -----
 IF EXIST %BINARY_ROOT% (
@@ -27,10 +27,11 @@ cd ..
 echo:
 
 echo ----- Running OpenPose Demo in video mode -----
-:: With default settings
+:: Different configuration, choose one according to your situation
+:: With default parameters
 %DEMO% %ARGS%
-:: With low resolution
+:: With low resolution (if your GPU has not enough memory)
 ::%DEMO% %ARGS_LOWRES%
-:: With CPU mode
+:: With CPU mode (if your GPU has not enough memory)
 ::%DEMO% %ARGS_CPU%
 echo:
