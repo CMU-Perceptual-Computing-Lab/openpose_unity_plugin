@@ -87,11 +87,11 @@ namespace OpenPose {
         public static void OPConfigurePose(
             PoseMode poseMode = PoseMode.Enabled, Vector2Int? netInputSize = null, Vector2Int? outputSize = null,
             ScaleMode keypointScaleMode = ScaleMode.InputResolution,
-            int gpuNumber = -1, int gpuNumberStart = 0, int scalesNumber = 1, float scaleGap = 0.3f,
-            RenderMode renderMode = RenderMode.Gpu, PoseModel poseModel = PoseModel.BODY_25,
+            int gpuNumber = -1, int gpuNumberStart = 0, int scalesNumber = 1, float scaleGap = 0.25f,
+            RenderMode renderMode = RenderMode.Auto, PoseModel poseModel = PoseModel.BODY_25,
             bool blendOriginalFrame = true, float alphaKeypoint = 0.6f, float alphaHeatMap = 0.7f,
             int defaultPartToRender = 0, string modelFolder = null,
-            HeatMapType heatMapTypes = HeatMapType.None, ScaleMode heatMapScaleMode = ScaleMode.UnsignedChar,
+            HeatMapType heatMapTypes = HeatMapType.None, ScaleMode heatMapScaleMode = ScaleMode.ZeroToOne,
             bool addPartCandidates = false, float renderThreshold = 0.05f, int numberPeopleMax = -1,
             bool maximizePositives = false, double fpsMax = -1.0,
             string protoTxtPath = "", string caffeModelPath = "", float upsamplingRatio = 0f){
@@ -121,7 +121,7 @@ namespace OpenPose {
         // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureHand(
             bool enable = false, Detector detector = Detector.Body, Vector2Int? netInputSize = null,
-            int scalesNumber = 1, float scaleRange = 0.4f, RenderMode renderMode = RenderMode.None,
+            int scalesNumber = 1, float scaleRange = 0.4f, RenderMode renderMode = RenderMode.Auto,
             float alphaKeypoint = 0.6f, float alphaHeatMap = 0.7f, float renderThreshold = 0.2f){
 
             // Other default values
@@ -137,7 +137,7 @@ namespace OpenPose {
         // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureFace(
             bool enable = false, Detector detector = Detector.Body,
-            Vector2Int? netInputSize = null, RenderMode renderMode = RenderMode.None,
+            Vector2Int? netInputSize = null, RenderMode renderMode = RenderMode.Auto,
             float alphaKeypoint = 0.6f, float alphaHeatMap = 0.7f, float renderThreshold = 0.4f){
 
             // Other default values
@@ -161,7 +161,7 @@ namespace OpenPose {
         // Input parameter configuration (with default value)
         // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureInput(
-            ProducerType producerType = ProducerType.Webcam, string producerString = "-1",
+            ProducerType producerType = ProducerType.None, string producerString = "-1",
             ulong frameFirst = 0, ulong frameStep = 1, ulong frameLast = ulong.MaxValue,
             bool realTimeProcessing = false, bool frameFlip = false,
             int frameRotate = 0, bool framesRepeat = false,
@@ -183,10 +183,10 @@ namespace OpenPose {
         // Output parameter configuration (with default value)
         // Please refer to OpenPose documentation for parameter explanation
         public static void OPConfigureOutput(
-            double verbose = -1.0, string writeKeypoint = "", DataFormat writeKeypointFormat = DataFormat.Yml,
+            double verbose = -1.0, string writeKeypoint = "", DataFormat writeKeypointFormat = DataFormat.Xml,
             string writeJson = "", string writeCocoJson = "", int writeCocoJsonVariants = 1,
             int writeCocoJsonVariant = 1, string writeImages = "", string writeImagesFormat = "png",
-            string writeVideo = "", double writeVideoFps = 30.0, bool writeVideoWithAudio = false, string writeHeatMaps = "",
+            string writeVideo = "", double writeVideoFps = -1.0, bool writeVideoWithAudio = false, string writeHeatMaps = "",
             string writeHeatMapsFormat = "png", string writeVideo3D = "", string writeVideoAdam = "",
             string writeBvh = "", string udpHost = "", string udpPort = "8051"){
 
