@@ -8,7 +8,8 @@
 
 
 ## Software Versions
-- Unity versions higher or equal than 2018.3. Previous versions may work as well.
+- Unity versions: 2018.3, 2018.4. Previous versions may work as well but issues won't be answered.
+- Unity 2019.1 is not fully supported yet. There are a few cases that Unity 2019 will crash with the lastest plugin version. You may try it but it is not guaranteed to work. If Unity 2019 crashes, use Unity 2018.4 instead. 
 - [**OpenPose**](https://github.com/CMU-Perceptual-Computing-Lab/openpose) version 1.5 or newer (version 1.5 comes by default).
 
 
@@ -35,7 +36,9 @@ If you are having fatal issues (e.g. Unity crashes) in running Unity Demo, pleas
 
 
 ## Updating OpenPose Unity Plugin
-When updating OpenPose Unity Plugin, make sure to re-run `getPlugins.bat` in the root folder. Or it would probably cause Unity to crash. If issue happens, refer to the session above to check. 
+If you have successfully run the demo before, you can follow this updating procedure instead of re-installing it: 
+ - Re-run `getPlugins.bat` in the **root** folder. This will automatically update new plugins. 
+ - Run the demo. It should work. 
 
 
 
