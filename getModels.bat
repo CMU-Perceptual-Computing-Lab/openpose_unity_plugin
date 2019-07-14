@@ -13,18 +13,18 @@ SET HAND_FOLDER=hand/
 echo:
 echo ------------------------- POSE (BODY+FOOT) MODELS -------------------------
 echo Body (BODY_25)
-set BODY_25_FOLDER=%POSE_FOLDER%body_25\
+set BODY_25_FOLDER=%POSE_FOLDER%body_25/
 set BODY_25_MODEL=%BODY_25_FOLDER%pose_iter_584000.caffemodel
 %WGET_EXE% -c %OPENPOSE_URL%%BODY_25_MODEL% -P %MODELS_FOLDER%%BODY_25_FOLDER%
 
 echo Body (COCO)
-SET COCO_FOLDER=%POSE_FOLDER%coco\
+SET COCO_FOLDER=%POSE_FOLDER%coco/
 SET COCO_MODEL=%COCO_FOLDER%pose_iter_440000.caffemodel
 %WGET_EXE% -c %OPENPOSE_URL%%COCO_MODEL% -P %MODELS_FOLDER%%COCO_FOLDER%
 
 echo:
 echo Body (MPI)
-SET MPI_FOLDER=%POSE_FOLDER%mpi\
+SET MPI_FOLDER=%POSE_FOLDER%mpi/
 SET MPI_MODEL=%MPI_FOLDER%pose_iter_160000.caffemodel
 %WGET_EXE% -c %OPENPOSE_URL%%MPI_MODEL% -P %MODELS_FOLDER%%MPI_FOLDER%
 echo ----------------------- POSE DOWNLOADED -----------------------
